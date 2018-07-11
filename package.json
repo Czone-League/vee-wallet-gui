@@ -4,6 +4,7 @@
     "description": "vee wallet gui ",
     "author": "masonExcelsia <mason@excelsia.io>",
     "private": true,
+    "main": "electron.js",
     "scripts": {
         "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
         "start": "npm run dev",
@@ -11,12 +12,15 @@
         "test": "npm run unit && npm run e2e",
         "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
         "build": "node build/build.js",
-        "electron": "NODE_ENV=DEV electron electron.js"
+        "electron": "NODE_ENV=DEV electron electron.js",
+        "packager": "electron-packager ./dist VEEClient --platform=darwin --arch=x64 --overwrite --prune --overwrite"
     },
     "dependencies": {
         "bignumber.js": "^7.2.1",
         "bootstrap-vue": "^2.0.0-rc.11",
         "crypto-js": "^3.1.9-1",
+        "electron-settings": "^3.2.0",
+        "glob": "^7.1.2",
         "identicon.js": "^2.3.2",
         "jr-qrcode": "^1.1.1",
         "vue": "^2.5.2",
@@ -28,6 +32,7 @@
         "vue-router": "^3.0.1"
     },
     "devDependencies": {
+        "asar": "^0.14.3",
         "autoprefixer": "^7.1.2",
         "babel-core": "^6.22.1",
         "babel-eslint": "^8.2.1",
@@ -45,6 +50,7 @@
         "cross-spawn": "^5.0.1",
         "css-loader": "^0.28.11",
         "electron": "^2.0.3",
+        "electron-packager": "^12.1.0",
         "eslint": "^4.15.0",
         "eslint-config-standard": "^10.2.1",
         "eslint-friendly-formatter": "^3.0.0",
@@ -60,7 +66,7 @@
         "html-webpack-plugin": "^2.30.1",
         "less": "^3.0.4",
         "less-loader": "^4.1.0",
-        "nightwatch": "^0.9.12",
+        "nightwatch": "^1.0.6",
         "node-notifier": "^5.1.2",
         "optimize-css-assets-webpack-plugin": "^3.2.0",
         "ora": "^1.2.0",
@@ -74,7 +80,7 @@
         "shelljs": "^0.7.6",
         "style-loader": "^0.21.0",
         "uglifyjs-webpack-plugin": "^1.1.1",
-        "url-loader": "^0.5.8",
+        "url-loader": "^1.0.1",
         "vue-loader": "^13.3.0",
         "vue-style-loader": "^3.0.1",
         "vue-template-compiler": "^2.5.2",
@@ -91,5 +97,17 @@
         "> 1%",
         "last 2 versions",
         "not ie <= 8"
-    ]
+    ],
+    "build": {
+        "appId": "tech.vee",
+        "productName": "VEEClient",
+        "copyright": "Copyright © 2017 VEE",
+        "directories": {
+            "output": "VEEClient",
+            "app": "./dist"
+        },
+        "files": [
+            "./**/*"
+        ]
+    }
 }

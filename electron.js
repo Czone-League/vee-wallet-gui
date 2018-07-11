@@ -1,24 +1,32 @@
-const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+const {app, BrowserWindow} = require('electron')
 
-let url
-if (process.env.NODE_ENV === 'DEV') {
-    url = 'http://localhost:8080/'
-} else {
-    url = `file://${process.cwd()}/dist/index.html`
-}
+// let url
+// if (process.env.NODE_ENV === 'DEV') {
+//     url = 'http://localhost:8080/'
+// } else {
+//     url = `file://${__dirname}/dist/index.html`
+// }
 
+let window;
 function createWindow() {
-    let window = new BrowserWindow({
+    window = new BrowserWindow({
         title: 'VEE Client',
         height: 600,
         width: 1000,
         minHeight: 600,
         minWidth: 800,
-        minimizable: true
+        minimizable: true,
+        webPreferences: {
+            webSecurity: false
+        }
     })
-    window.loadURL(url)
+    // app.on('ready', () => {
+    window.loadFile('index.html');
+    // })
+    // setTimeout(() => {
+    //     window.loadURL(url);
+    // }, 2000);
+    window.openDevTools()
     window.on('close', () => {
         window = null
     })
