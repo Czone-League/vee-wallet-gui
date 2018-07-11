@@ -1,4 +1,6 @@
 const {app, BrowserWindow} = require('electron')
+const url = require('url')
+const path = require('path')
 
 // let url
 // if (process.env.NODE_ENV === 'DEV') {
@@ -21,8 +23,11 @@ function createWindow() {
         }
     })
     // app.on('ready', () => {
-    window.loadFile('index.html');
-    // })
+    window.loadURL(url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+    }))    // })
     // setTimeout(() => {
     //     window.loadURL(url);
     // }, 2000);
